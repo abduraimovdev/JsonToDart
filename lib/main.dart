@@ -23,6 +23,19 @@ void main() {
   jsonToDart(json: map, path: "$currentPath\\model", name: "todos");
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 void jsonToDart({
   required Map<String, Object?> json,
   required String path,
@@ -58,6 +71,8 @@ void jsonToDart({
   //Constructor value
   json.forEach((key, value) => jsonToClass.writeln("\t\tthis.$key,"));
 
+
+  //FromJson
   jsonToClass.writeln(
       "\t);\n\n\tfactory $className.fromJson(Map<String, Object?> json) {\n\t\treturn $className(");
 
@@ -73,7 +88,9 @@ void jsonToDart({
       jsonToClass.writeln("\t\t\tjson['$key'] as ${value.runtimeType},");
     }
   });
+  //FromJson End
 
+  // ToJson
   jsonToClass.writeln("\t\t);\n\t}\n\n\tMap<String,Object?> toJson() => {");
 
   json.forEach((key, value) {
@@ -86,7 +103,9 @@ void jsonToDart({
     }
   });
 
+  // ToJson End
   jsonToClass.writeln("\t};\n}");
+
 
   // File Create
   File file = File("$path\\$name.dart");
